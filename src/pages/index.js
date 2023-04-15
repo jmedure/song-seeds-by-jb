@@ -1,124 +1,106 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Image from 'next/image';
+import React from 'react';
+import useSWR from 'swr';
+import { Card } from '../../components/Card';
+import { ReactFragment } from 'react';
+// import { getRandomCard } from '../utils/cards';
 
-const inter = Inter({ subsets: ['latin'] })
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+  // const [likes, setLikes] = React.useState(0);
+  const [activeCard, setActiveCard] = React.useState(0);
+
+  const randomCard = (e) => {
+    const len = data.length;
+    setActiveCard(Math.floor(Math.random() * len));
+  };
+
+  // function handleClick() {
+  //   setLikes(likes + 1);
+  // }
+
+  const { data, error } = useSWR('/api/cards', fetcher);
+
+  const main = () => {
+    if (error) {
+      return <main>error: failed to load</main>;
+    }
+    if (!data) {
+      return <main className="container-fg text-xl py-20">loading...</main>;
+    }
+    return (
+      <main className="flex min-h-screen items-center justify-center p-24 font-mont font-thin mx-auto">
+        <div className="w-full max-w-5xl flex-block mx-auto">
+          <div className="uppercase w-full flex justify-center mx-auto">
+            song seeds by{' '}
+            <a
+              className="underline text-blue-200 hover:text-white transition-all transition-.2ms"
+              href="https://jacobs.blue"
+            >
+              jacob's blue
+            </a>
+          </div>
+          <div className="flex flex-wrap items-center col-span-1 justify-center mx-auto py-52 space-y-16 w-full">
+            <div className="flex-col mx-auto flex rounded-[50px] items-center justify-center p-4 h-[296px] max-h-[296px] animate-[wiggle_10s_ease_infinite]  bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)]">
+              <p className="font-fruit font-normal mx-auto text-4xl tracking-tight align-middle items-center text-center p-16 m-8">
+                {data[activeCard].reg}{' '}
+                <i className="font-thin">{data[activeCard].ital}</i>.
+              </p>
+              <p className="flex uppercase text-center absolute bottom-6 font-mont tracking-tight font-normal text-xs">
+                song seeds by jacob's blue
+              </p>
+            </div>
+
+            {/* Was trying to use old function from JB */}
+            {/* {data.map(function (card, index) {
+              if (card.id > 0) return <Card key={index} card={card} />;
+            })} */}
+            {/* <Card
+              reg={data[activeCard].reg}
+              ital={data[activeCard].ital}
+              id={data[activeCard].id}
+            /> */}
+
+            <div className="flex w-full justify-center mx-auto">
+              <a
+                onClick={randomCard}
+                className="cursor-pointer text-center uppercase py-3 px-8 bg-none hover:bg-white active:bg-white/90 active:drop-shadow-none hover:drop-shadow-lg hover:text-j-blue rounded-full border-solid border border-white transition-all .3s"
+              >
+                draw card {data.id}
+              </a>
+            </div>
+          </div>
+          <div className="flex uppercase w-full mx-auto items-center justify-center  space-x-8">
+            <a
+              className="underline text-blue-200 hover:text-white transition-all transition-.2ms"
+              href="https://jacobs.blue"
+            >
+              About
+            </a>
+            <a
+              className="underline text-blue-200 hover:text-white transition-all transition-.2ms"
+              href="https://jacobs.blue"
+            >
+              Feedback
+            </a>
+          </div>
         </div>
-      </div>
+      </main>
+    );
+  };
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+  return (
+    <>
+      {/* <BlogSEO
+        title={
+          "Jacob's Blue | All things artist, songwriter and producer Jacob's Blue"
+        }
+        description="Pursuing mastery in music...probably cooking something."
+        image="/siteThumb.png"
+        canonical="/index"
+      /> */}
+      {main()}
+    </>
+  );
 }

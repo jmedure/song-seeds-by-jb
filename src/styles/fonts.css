@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "CardinalFruit";
+    src: url("/fonts/cardinalfruit-italic.otf") format("opentype");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "CardinalFruit";
+    src: url("/fonts/cardinalfruit-regular.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/fonts/PPNeueMontreal-Book.otf") format("opentype");
+    font-weight: 300;
+    font-style: light;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/fonts/PPNeueMontreal-Italic.otf") format("opentype");
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/fonts/PPNeueMontreal-SemiBoldItalic.otf") format("opentype");
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "NeueMontreal";
+    src: url("/fonts/PPNeueMontreal-Bold.otf") format("opentype");
+    font-weight: 800;
+    font-style: bold;
+}

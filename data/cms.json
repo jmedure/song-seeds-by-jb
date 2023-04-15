@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1 ,
+        "reg": "Start with",
+        "ital": "why"
+    },
+    {
+        "id": 2 ,
+        "reg": "Paint it",
+        "ital": "blue"
+    },
+    {
+        "id": 3 ,
+        "reg": "You have 10 minutes. The clock",
+        "ital": "starts now"
+    }
+]
