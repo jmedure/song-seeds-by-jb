@@ -3,22 +3,39 @@ import React from 'react';
 import useSWR from 'swr';
 import { Card } from '../../components/Card';
 import { ReactFragment } from 'react';
-// import { getRandomCard } from '../utils/cards';
+// import { getRandomCard } from '../cards';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
-  // const [likes, setLikes] = React.useState(0);
   const [activeCard, setActiveCard] = React.useState(0);
 
-  const randomCard = (e) => {
+  const getRandomCard = (e) => {
+    // Add a class to the current card to animate it off the screen
+    document.querySelector('.card').classList.add('card-exit');
+
     const len = data.length;
     setActiveCard(Math.floor(Math.random() * len));
+
+    // Wait for a short time before removing the exit animation class
+    setTimeout(() => {
+      document.querySelector('.card').classList.remove('card-exit');
+    }, 500);
   };
 
-  // function handleClick() {
-  //   setLikes(likes + 1);
-  // }
+  // const handleClick = () => {
+  //   // Add a class to the current card to animate it off the screen
+  //   document.querySelector('.card').classList.add('card-exit');
+
+  //   // Generate a new random card
+  //   const newCard = getRandomCard();
+  //   setActiveCard(newCard);
+
+  //   // Wait for a short time before removing the exit animation class
+  //   setTimeout(() => {
+  //     document.querySelector('.card').classList.remove('card-exit');
+  //   }, 500);
+  // };
 
   const { data, error } = useSWR('/api/cards', fetcher);
 
@@ -42,7 +59,7 @@ export default function Home() {
             </a>
           </div>
           <div className="flex flex-wrap items-center col-span-1 justify-center mx-auto py-52 space-y-16 w-full">
-            <div className="flex-col mx-auto flex rounded-[50px] items-center justify-center p-4 h-[296px] max-h-[296px] animate-[wiggle_10s_ease_infinite]  bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)]">
+            <div className="flex-col card mx-auto flex rounded-[50px] items-center justify-center p-4 h-[296px] max-h-[296px] animate-[wiggle_10s_ease_infinite]  bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)]">
               <p className="font-fruit font-normal mx-auto text-4xl tracking-tight align-middle items-center text-center p-16 m-8">
                 {data[activeCard].reg}{' '}
                 <i className="font-thin">{data[activeCard].ital}</i>.
@@ -63,12 +80,12 @@ export default function Home() {
             /> */}
 
             <div className="flex w-full justify-center mx-auto">
-              <a
-                onClick={randomCard}
+              <button
+                onClick={getRandomCard}
                 className="cursor-pointer text-center uppercase py-3 px-8 bg-none hover:bg-white active:bg-white/90 active:drop-shadow-none hover:drop-shadow-lg hover:text-j-blue rounded-full border-solid border border-white transition-all .3s"
               >
-                draw card {data.id}
-              </a>
+                draw card
+              </button>
             </div>
           </div>
           <div className="flex uppercase w-full mx-auto items-center justify-center  space-x-8">

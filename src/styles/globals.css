@@ -27,3 +27,16 @@ body {
     ) */
     rgb(var(--blue));
 }
+
+.card {
+  /* Add a transition to animate the card */
+  transition: transform 0.5s ease-in-out;
+
+  /* Set the initial position of the card */
+  transform: translateX(0%);
+}
+
+.card-exit {
+  /* Animate the card off the screen */
+  transform: translateX(-100%);
+}
