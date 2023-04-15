@@ -38,7 +38,7 @@ export default function Home() {
               className="underline text-blue-200 hover:text-white transition-all transition-.2ms"
               href="https://jacobs.blue"
             >
-              jacob's blue
+              jacob&#39;s blue
             </a>
           </div>
           <div className="flex flex-wrap items-center col-span-1 justify-center mx-auto py-52 space-y-16 w-full">
@@ -48,7 +48,7 @@ export default function Home() {
                 <i className="font-thin">{data[activeCard].ital}</i>.
               </p>
               <p className="flex uppercase text-center absolute bottom-6 font-mont tracking-tight font-normal text-xs">
-                song seeds by jacob's blue
+                song seeds by jacob&#39;s blue
               </p>
             </div>
 
