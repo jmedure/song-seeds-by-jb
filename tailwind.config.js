@@ -44,9 +44,9 @@ module.exports = {
         },
         wiggle: {
           '0%, 100%': {
-            transform: 'rotate(-1deg) translateY(-1%)',
+              transform: 'rotate(-1deg) translateX(-50%) translateY(-49%)',
           },
-          '50%': { transform: 'rotate(1deg) translateY(4%)' },
+            '50%': { transform: 'rotate(1deg) translateX(-50%) translateY(-54%)' },
         },
         bouncy: {
           '0%, 100%': {
