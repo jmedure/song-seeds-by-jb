@@ -23,20 +23,6 @@ export default function Home() {
     }, 1000);
   };
 
-  // const handleClick = () => {
-  //   // Add a class to the current card to animate it off the screen
-  //   document.querySelector('.card').classList.add('card-exit');
-
-  //   // Generate a new random card
-  //   const newCard = getRandomCard();
-  //   setActiveCard(newCard);
-
-  //   // Wait for a short time before removing the exit animation class
-  //   setTimeout(() => {
-  //     document.querySelector('.card').classList.remove('card-exit');
-  //   }, 500);
-  // };
-
   const { data, error } = useSWR('/api/cards', fetcher);
 
   const main = () => {
@@ -44,7 +30,7 @@ export default function Home() {
       return <main>error: failed to load</main>;
     }
     if (!data) {
-      return <main className="container-fg text-xl py-20">loading...</main>;
+      return <main className="text-xl py-20">loading...</main>;
     }
     return (
       <main className="flex min-h-screen items-center justify-center p-24 font-mont font-thin mx-auto">
