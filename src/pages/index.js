@@ -39,6 +39,7 @@ export default function Home() {
       active.classList.replace("transition-all", "transition-none");
       active.classList.replace("-left-[280px]", "left-1/2");
 
+
       next.classList.replace("transition-all", "transition-none");
       next.classList.replace("left-1/2", "left-[calc(100%+280px)]");
     }, 600);
@@ -51,7 +52,7 @@ export default function Home() {
       return <main>error: failed to load</main>;
     }
     if (!data) {
-      return <main className="container-fg text-xl py-20">loading...</main>;
+      return <main className="text-xl py-20">loading...</main>;
     }
     return (
       <main className="flex flex-col min-h-screen items-center justify-center py-24">
