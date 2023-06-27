@@ -9,7 +9,7 @@ const Card = ({ card }) => {
   const { id, reg, ital } = card;
 
   return (
-    <div className="card mx-auto flex w-[400px] rounded-[50px] items-center justify-center p-4 h-[296px] max-h-[296px] animate-[wiggle_10s_ease_infinite] bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)]">
+    <div className="card mx-auto flex w-full rounded-[50px] items-center justify-center p-4 h-[296px] max-h-[296px] animate-[wiggle_10s_ease_infinite] bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)]">
       <p className="font-fruit font-normal mx-auto text-4xl tracking-tight align-middle items-center text-center p-16 m-8">
         {reg} <i className="font-thin">{ital}</i>.
       </p>
@@ -21,28 +21,47 @@ const Card = ({ card }) => {
 };
 
 export default function Home() {
-  const [activeCard, setActiveCard] = React.useState(0);
-  const [nextCard, setNextCard] = React.useState(1);
+  const [count, setCount] = React.useState(0);
 
   const getRandomCard = (e) => {
-    const active = document.querySelector("#active-card");
-    active.classList.replace("transition-none", "transition-all");
-    active.classList.replace("left-1/2", "-left-[280px]");
+    const cards = document.querySelector("#cards");
+    const curr = cards.children[0];
+    const next = cards.children[1];
 
-    const next = document.querySelector("#next-card");
-    next.classList.replace("transition-none", "transition-all");
-    next.classList.replace("left-[calc(100%+280px)]", "left-1/2");
+    if (next) {
+      curr.classList.replace("left-1/2", "-left-[280px]");
+      next.classList.replace("left-[calc(100%+280px)]", "left-1/2");
 
-    setTimeout(() => {
-      setActiveCard(nextCard);
-      setNextCard(Math.floor(Math.random() * data.length));
-      active.classList.replace("transition-all", "transition-none");
-      active.classList.replace("-left-[280px]", "left-1/2");
-
-
-      next.classList.replace("transition-all", "transition-none");
-      next.classList.replace("left-1/2", "left-[calc(100%+280px)]");
-    }, 600);
+      setTimeout(() => {
+        curr.remove();
+        setCount(count + 1);
+        let r = Math.floor(Math.random() * data.length);
+        console.log(r, data.length);
+        let randCard = data[r];
+        let container = document.createElement("div");
+        container.className =
+          "absolute w-[90%] top-0 left-[calc(100%+280px)] transition-all duration-500 -translate-x-1/2";
+        let card = document.createElement("div");
+        card.className =
+          "card mx-auto flex w-full rounded-[50px] items-center justify-center p-4 h-[296px] max-h-[296px] animate-[wiggle_10s_ease_infinite] bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)]";
+        let text = document.createElement("p");
+        text.textContent = randCard.reg;
+        text.className =
+          "font-fruit font-normal mx-auto text-4xl tracking-tight align-middle items-center text-center p-16 m-8";
+        let ital = document.createElement("i");
+        ital.className = "font-thin pl-2";
+        ital.textContent = randCard.ital;
+        text.appendChild(ital);
+        let footer = document.createElement("p");
+        footer.className =
+          "flex uppercase text-center absolute bottom-6 font-mont tracking-tight font-normal text-xs";
+        footer.textContent = "song seeds by jacob's blue";
+        card.appendChild(text);
+        card.appendChild(footer);
+        container.appendChild(card);
+        cards.appendChild(container);
+      }, 600);
+    }
   };
 
   const { data, error } = useSWR("/api/cards", fetcher);
@@ -68,18 +87,12 @@ export default function Home() {
 
         {/* cards */}
         <div className="w-full overflow-x-clip pt-20">
-          <div className="w-full relative h-[320px] z-10">
-            <div
-              id="active-card"
-              className="absolute top-0 left-1/2 transition-all duration-500 -translate-x-1/2"
-            >
-              <Card card={data[activeCard]} />
+          <div className="w-full relative h-[320px] z-10" id="cards">
+            <div className="absolute w-[90%] top-0 left-1/2 transition-all duration-500 -translate-x-1/2">
+              <Card card={data[0]} />
             </div>
-            <div
-              id="next-card"
-              className="absolute top-0 left-[calc(100%+280px)] transition-all duration-500 -translate-x-1/2"
-            >
-              <Card card={data[nextCard]} />
+            <div className="absolute w-[90%] top-0 left-[calc(100%+280px)] transition-all duration-500 -translate-x-1/2">
+              <Card card={data[1]} />
             </div>
           </div>
         </div>
