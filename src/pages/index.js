@@ -50,7 +50,7 @@ export default function Home() {
           "font-fruit font-normal mx-auto text-4xl tracking-tight align-middle items-center text-center p-16 m-8";
         let ital = document.createElement("i");
         ital.className = "font-thin pl-2";
-        ital.textContent = randCard.ital;
+        ital.textContent = randCard.ital + ".";
         text.appendChild(ital);
         let footer = document.createElement("p");
         footer.className =
