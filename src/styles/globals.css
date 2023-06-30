@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255; 
+  --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; 
+  --background-end-rgb: 255, 255, 255;
   --blue: 55, 86, 185;
 }
 
@@ -19,21 +19,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: 
-  /* linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--blue))
-    ) */
-    rgb(var(--blue));
+  background: rgb(var(--blue));
 }
 
-.card {
-  /* Add a transition to animate the card */
-  transition: transform 0.5s ease-in-out;
-}
-
-.card .card-exit {
-  /* Animate the card off the screen */
-  transform: translateX(-100%);
+main {
+  @apply font-mont font-thin;
 }
