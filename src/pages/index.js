@@ -164,14 +164,14 @@ export default function Home() {
             'Creative constraints for the modern musician - Now in beta',
           images: [
             {
-              url: 'notion://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fdfbd2cce-349e-43aa-8010-ebd3f593bd48%2F800x600.png?id=17af6561-13b6-4408-a5e2-11c2a16575b6&table=block&spaceId=2afffdaa-a1f9-48fc-8af5-a4f4e2aaefbf&width=1690&userId=eb892e74-d964-49ba-9ea8-d5261359b5e6&cache=v2',
+              url: 'https://freegame.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fdfbd2cce-349e-43aa-8010-ebd3f593bd48%2F800x600.png?table=block&id=17af6561-13b6-4408-a5e2-11c2a16575b6&spaceId=2afffdaa-a1f9-48fc-8af5-a4f4e2aaefbf&width=2000&userId=&cache=v2',
               width: 800,
               height: 600,
               alt: 'Song Seeds Card',
               type: 'image/png',
             },
             {
-              url: 'notion://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd32e2176-2e59-40ba-b394-55191f497405%2F800x900.png?id=88d33293-b2e9-44e5-ba60-c38427398959&table=block&spaceId=2afffdaa-a1f9-48fc-8af5-a4f4e2aaefbf&width=1690&userId=eb892e74-d964-49ba-9ea8-d5261359b5e6&cache=v2g',
+              url: 'https://freegame.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd32e2176-2e59-40ba-b394-55191f497405%2F800x900.png?table=block&id=88d33293-b2e9-44e5-ba60-c38427398959&spaceId=2afffdaa-a1f9-48fc-8af5-a4f4e2aaefbf&width=2000&userId=&cache=v2',
               width: 900,
               height: 800,
               alt: 'Song Seeds Card',
