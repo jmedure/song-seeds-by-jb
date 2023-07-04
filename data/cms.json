@@ -13,5 +13,10 @@
         "id": 3 ,
         "reg": "You have 10 minutes. The clock",
         "ital": "starts now"
+    },
+    {
+        "id": 4 ,
+        "reg": "Make something from",
+        "ital": "scratch"
     }
 ]
