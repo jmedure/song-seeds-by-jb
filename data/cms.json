@@ -2,21 +2,25 @@
     {
         "id": 1 ,
         "reg": "Start with",
-        "ital": "why"
+        "ital": "why",
+        "face": "front"
     },
     {
         "id": 2 ,
         "reg": "Paint it",
-        "ital": "blue"
+        "ital": "blue",
+        "face": "font"
     },
     {
         "id": 3 ,
         "reg": "You have 10 minutes. The clock",
-        "ital": "starts now"
+        "ital": "starts now",
+        "face": "front"
     },
     {
         "id": 4 ,
         "reg": "Make something from",
-        "ital": "scratch"
+        "ital": "scratch",
+        "face": "front"
     }
 ]

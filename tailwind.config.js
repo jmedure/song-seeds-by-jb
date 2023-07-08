@@ -2,6 +2,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
@@ -12,6 +13,7 @@ module.exports = {
       animation: {
         'slide-in-right': 'slideInRight 0.5s ease-out',
         'slide-out-left': 'slideOutLeft 0.5s ease-out',
+        flip: 'flip 100ms ease-in-out',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -48,6 +50,12 @@ module.exports = {
           },
           '50%': { transform: 'rotate(1deg) translateY(4%)' },
         },
+        wiggle1: {
+          '0%, 100%': {
+            transform: 'rotate(-1deg) translateY(-2%)',
+          },
+          '50%': { transform: 'rotate(2deg) translateY(4%)' },
+        },
         bouncy: {
           '0%, 100%': {
             transform: 'translateY(-25%)',
@@ -56,8 +64,11 @@ module.exports = {
             transform: 'translateY(25%)',
           },
         },
+        flip: {
+          '0%': { transform: 'rotateY(180deg)' },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-3d')({ legacy: true })],
 };

@@ -2,26 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --blue: 55, 86, 185;
+@layer base {
+  body{
+    @apply dark:bg-j-blue
+  }
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
-
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--blue));
+} */
+
+#is-flipped {
+  transform: rotateY(720deg);
 }
+
+/* .back {
+  background-color: aqua;
+} */  
 
 main {
   @apply font-mont font-thin;
 }
+

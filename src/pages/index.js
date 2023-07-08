@@ -1,29 +1,57 @@
-// import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useSWR from 'swr';
-// import { ReactFragment } from 'react';
-import { BsLink45Deg } from 'react-icons/bs';
-import { FiCheck } from 'react-icons/fi';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Translate } from '@mui/icons-material';
+import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Card = ({ card }) => {
   const { id, reg, ital } = card;
 
+  const [effect, setEffect] = useState(false);
+  let effectChecker = effect ? ' animate-flip' : ' ';
+
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
+
   return (
-    <div className="card mx-auto flex sm:rounded-[50px] items-center justify-center p-4 h-[260px] max-h-[260px] sm:h-[296px] sm:max-h-[296px] animate-[wiggle_10s_ease_infinite] bg-white text-j-blue sm:w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)] duration-300 rounded-[2.5em]">
-      <p className="font-fruit mx-auto text-4xl font-medium sm:text-4xl tracking-tight align-middle items-center text-center p-16 m-8">
-        {reg} <i className="font-medium">{ital}</i>.
-      </p>
-      <p className="flex uppercase text-center absolute bottom-4 sm:bottom-6 font-mont tracking-tight font-normal sm:text-xs text-[10px]">
-        song seeds by jacob&#39;s blue
-      </p>
-    </div>
+    <button
+      className={`${effectChecker} card -rotate-2 origin-left flex transform-style-3d transition-transform perspective-1000 animate-[wiggle_20s_ease_infinite] cursor-pointer mx-auto`}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+    >
+      {resolvedTheme === 'dark' ? (
+        <div className="card-face front cursor-pointer mx-auto flex items-center justify-center p-4 bg-white text-j-blue drop-shadow-[0px_25px_50px_rgba(0,0,0,0.4)] duration-300 sm:w-[420px] max-w-[420px] h-[260px] max-h-[260px] sm:h-[296px] sm:max-h-[296px] rounded-[2.5em] sm:rounded-[50px]">
+          <p className="font-fruit mx-auto text-4xl font-medium sm:text-4xl tracking-tight align-middle items-center text-center p-16 m-8">
+            {reg}
+            <i className="font-medium"> {ital}</i>.
+          </p>
+          <p className="flex uppercase text-center absolute bottom-4 sm:bottom-6 font-mont tracking-tight font-normal sm:text-xs text-[10px]">
+            song seeds by jacob&#39;s blue
+          </p>
+        </div>
+      ) : (
+        <div className="card-face origin-center rotate-y-180 card mx-auto flex items-center justify-center p-4 sm:w-[420px] max-w-[420px] h-[260px] max-h-[260px] sm:h-[296px] sm:max-h-[296px] rounded-[2.5em] sm:rounded-[50px] bg-j-blue text-white duration-300">
+          <div className="flex-col rotate-y-180">
+            <p className="font-mont uppercase mx-auto text-2xl sm:text-3xl tracking-tight align-middle items-center text-center ">
+              Song Starters
+            </p>
+            <p className="font-fruit mx-auto text-4xl font-medium italic sm:text-2xl tracking-tight align-middle items-center text-center">
+              Level 1
+            </p>
+          </div>
+          <p className="flex rotate-y-180 uppercase text-center absolute bottom-4 sm:bottom-6 font-mont tracking-tight font-normal sm:text-xs text-[10px]">
+            song seeds by jacob&#39;s blue
+          </p>
+        </div>
+      )}
+    </button>
   );
 };
 
@@ -34,7 +62,6 @@ export default function Home() {
     const cards = document.querySelector('#cards');
     const curr = cards.children[0];
     const next = cards.children[1];
-    // window.navigator.vibrate(200);
 
     if (next) {
       curr.classList.replace('left-1/2', '-left-[280px]');
@@ -51,7 +78,7 @@ export default function Home() {
           'absolute w-[90%] top-0 left-[calc(100%+280px)] ease-[cubic-bezier(.44,-0.02,.63,1)] transition-all duration-300 -translate-x-1/2';
         let card = document.createElement('div');
         card.className =
-          'card mx-auto flex w-full rounded-[50px] items-center justify-center h-[260px] max-h-[260px] sm:h-[296px] sm:max-h-[296px] animate-[wiggle_10s_ease_infinite] bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.5)]';
+          'group origin-center perspective-1000 transform-style-3d backface-hidden	group-hover:rotate-y-180 cursor-pointer card mx-auto flex w-full rounded-[50px] items-center justify-center h-[260px] max-h-[260px] sm:h-[296px] sm:max-h-[296px] animate-[wiggle1_10s_ease_infinite] bg-white text-j-blue w-[420px] max-w-[420px] drop-shadow-[0px_25px_50px_rgba(0,0,0,0.5)]';
         let text = document.createElement('p');
         text.textContent = randCard.reg;
         text.className =
@@ -80,26 +107,26 @@ export default function Home() {
     }
     if (!data) {
       return (
-        <main className="flex text-xl py-96 w-full h-screen mx-auto justify-center text-sans ">
+        <main className="flex text-xl py-auto w-full h-screen mx-auto justify-center items-center text-sans ">
           loading...
         </main>
       );
     }
     return (
-      <main className="flex focus:border-2 focus:border-solid focus:border-inherit focus:border-lime-400 flex-col min-h-screen space-y-24 sm:space-y-48 items-center justify-center">
+      <main className="flex flex-col min-h-screen space-y-24 text-j-blue dark:text-white sm:space-y-48 items-center justify-center">
         <div className="uppercase w-full items-center flex justify-center space-x-1  mx-auto">
           <p>song seeds by jacob&#39;s blue</p>
           <p className="font-fruit lowercase italic opacity-70">(v 1.0)</p>
         </div>
 
         {/* cards */}
-        <div className="flex space-y-8 sm:space-y-16 w-full flex-col justify-center align-middle items-center">
+        <div className="flex space-y-8 sm:space-y-16 w-full flex-col min-h-full justify-center align-middle items-center">
           <div className="w-full overflow-x-clip">
             <div
-              className="w-full relative h-[300px] sm:h-[320px] z-10"
+              className="w-full relative h-[300px] sm:h-[320px] perspective-500 z-10"
               id="cards"
             >
-              <div className="absolute w-[90%] top-0 left-1/2 transition-all ease-[cubic-bezier(.44,-0.02,.63,1)] duration-300 -translate-x-1/2">
+              <div className="absolute w-[90%] top-0 left-1/2  transition-all  ease-[cubic-bezier(.44,-0.02,.63,1)] duration-300 -translate-x-1/2">
                 <Card card={data[0]} />
               </div>
               <div className="absolute w-[90%] top-0 left-[calc(100%+280px)] ease-[cubic-bezier(.44,-0.02,.63,1)] transition-all duration-300 -translate-x-1/2">
@@ -112,12 +139,12 @@ export default function Home() {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={getRandomCard}
-            className="cursor-pointer text-center uppercase py-4 px-8 bg-none sm:hover:bg-white sm:active:drop-shadow-none sm:hover:drop-shadow-lg sm:hover:text-j-blue rounded-full border-solid border border-white transition-all"
+            className="cursor-pointer opacity-0 dark:opacity-100 dark:text-white text-center uppercase py-4 px-8 bg-none sm:hover:bg-white sm:active:drop-shadow-none sm:hover:drop-shadow-lg sm:hover:text-j-blue rounded-full border-solid border border-white transition-all"
           >
             draw card
           </motion.button>
         </div>
-        <div className="flex items-center justify-center underline-offset-2 space-x-8 ">
+        <div className="opacity-0 dark:opacity-100 flex items-center justify-center underline-offset-2 space-x-8 ">
           <a
             className="underline uppercase items-center text-blue-200 p-2 hover:text-white transition-all duration-200"
             href="https://jacobs.blue/meditations/on-creative-contraints"
@@ -192,7 +219,6 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 1, y: '-100%' }}
             animate={{ opacity: 1, y: '100%' }}
-            // whileInView={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{
               ease: 'linear',
@@ -200,23 +226,21 @@ export default function Home() {
             }}
             className="absolute font-mont flex items-center justify-center text-center rounded-lg no-underline p-4 mx-auto top-8 w-80 align-middle whitespace-nowrap transition-all bg-[#99FF69] text-black text-sans text-sm"
           >
-            <p className="no-underline">Copied URL to clipboard!</p>
-            <FiCheck />
-          </motion.div>
+            <p className="no-underline">Copied URL to clipboard!</p> */}
+      {/* <FiCheck /> */}
+      {/* </motion.div>
         </AnimatePresence>
       ) : null}
-      <div className=" hidden sm:flex"> */}
-      {/* <div
+      <div className=" hidden sm:flex">
+        <div
           onClick={copylink}
           className="absolute sm:hover:bg-white/20 transition-all cursor-pointer top-8 right-8 p-2 border border-solid border-j-blue bg-white/10 text-white rounded-full"
-        >
-          <BsLink45Deg />
-          {isCopied ? (
+        > */}
+      {/* <BsLink45Deg /> */}
+      {/* {isCopied ? (
             <motion.div
               initial={{ opacity: 0, y: 1 }}
-              // onLoad={{ opacity: 1, y: -1 }}
               animate={{ opacity: 1, translateY: 0 }}
-              // exit={{ opacity: 0 }}
               transition={{
                 ease: 'linear',
                 duration: 0.3,
